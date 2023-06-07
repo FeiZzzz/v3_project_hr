@@ -8,7 +8,22 @@
       <div class="form">
         <h3>iHRM 人力资源管理系统</h3>
         <a-card class="login-card">
-           登录表单
+                  <!-- 放置登录表单 -->
+        <!-- autocomplete不自动填充表单 -->
+        <a-form autocomplete="off">
+          <a-form-item>
+            <a-input size="large"></a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-input-password size="large"></a-input-password>
+          </a-form-item>
+          <a-form-item>
+            <a-checkbox>用户平台使用协议</a-checkbox>
+          </a-form-item>
+          <a-form-item>
+            <a-button size="large" type="primary" block>登录</a-button>
+          </a-form-item>
+        </a-form>
         </a-card>
       </div>
     </div>
