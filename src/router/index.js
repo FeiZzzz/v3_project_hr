@@ -6,8 +6,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: Layout
+      redirect: '/dashboard',
+      component: Layout,
+      // 子节点
+      children: [
+        {
+          path: 'dashboard', // 二级路由地址
+          component: () => import('../views/dashborard/index.vue'),
+          // 路由元信息
+          meta: {
+            title: '数据看板',
+            icon: 'HomeOutlined'
+          }
+        }
+      ]
     },
     {
       path: '/login',
@@ -15,7 +27,8 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/login/index.vue')
+      component: () => import('../views/login/index.vue'),
+      hidden: true
     }
   ]
 })

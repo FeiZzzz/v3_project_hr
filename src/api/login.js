@@ -13,3 +13,11 @@ export function login(data) {
         // 请求体参数-  url参数 请求体参数  header body
     }) // 返回promise对象
 }
+
+export function getUserInfo(){
+    return request({
+        url:'/sys/profile',
+        method:'post',
+
+    })
+}
