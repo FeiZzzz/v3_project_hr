@@ -5,7 +5,8 @@
       <MenuFoldOutlined v-else />
     </div>
     <a-popover placement="bottomRight">
-      <a-avatar class="my-avatar">U</a-avatar>
+      <span class="user-name">{{ userInfo.username }}</span>
+      <a-avatar class="my-avatar">{{userInfo.username?.charAt[0]}}</a-avatar>
       <template #content>
         <div class="my-select">
           <p class="item">
@@ -16,6 +17,10 @@
     </a-popover>
   </template>
   <script setup>
+  import {onMounted,ref} from 'vue'
+  import {getUserInfo} from '../../../api/login'
+
+const userInfo = ref({})
   const { collapsed } = defineProps({
     collapsed: Boolean
   })
@@ -25,6 +30,10 @@
     emit('update:collapsed', !collapsed)  // 触发了一个事件- 传出了一个参数 子传父
     // v-model实际上是监听了 子组件触发的事件  update:modelValue
   }
+const getUserProfile = async ()=>{
+  userInfo.value = await getUserInfo()
+}
+  onMounted(()=>getUserProfile())
   </script>
   <style scoped>
   .my-avatar {

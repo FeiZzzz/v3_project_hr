@@ -1,5 +1,6 @@
 import axios from "axios";
 import {message as Msg} from 'ant-design-vue'
+import useToken from '../stores/token'
 // 使用axios 创建实例
 
 const serive = axios.create({
@@ -12,6 +13,12 @@ const serive = axios.create({
 
 serive.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
+    // 统一注入token
+    const {token} = useToken()
+    if(token){
+        // 有token
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -38,5 +45,6 @@ axios.interceptors.response.use(function (response) {
 },(err)=>Promise.reject(err));
 
 // 导出工具
+
 
 export default serive;
