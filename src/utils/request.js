@@ -1,6 +1,7 @@
 import axios from "axios";
 import {message as Msg} from 'ant-design-vue'
 import useToken from '../stores/token'
+import router from '../router/index'
 // 使用axios 创建实例
 
 const serive = axios.create({
@@ -42,7 +43,17 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(new Error(message));
    
    
-},(err)=>Promise.reject(err));
+},(err)=>{
+    // 如果响应码状态为401表示token超时了 超时和没有token是一样的
+    if(err.response.status === 401){
+        const {removeToken} = useToken()
+        // 删除token
+        removeToken()
+        // 回到登陆页面
+        router.push('/login')
+    }
+  return  Promise.reject(err)
+});
 
 // 导出工具
 
