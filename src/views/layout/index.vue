@@ -1,26 +1,25 @@
 <template>
-    <a-layout class="app-layout">
-      <a-layout-sider :collapsed="collapsed" collapsible :trigger="null">
-        <div class="logo">{{ collapsed ? 'HR' : 'HRSASS' }}</div>
-         <!-- 左侧内容 -->
-         <sideBar/>
-      </a-layout-sider>
-      <a-layout class="right-layout">
-        <a-layout-header>
-          <NavBar v-model:collapsed="collapsed"/>
-        </a-layout-header>
-        <a-layout-content>
-          <Dashborard/>
-        </a-layout-content>
-      </a-layout>
+  <a-layout class="app-layout">
+    <a-layout-sider :collapsed="collapsed" collapsible :trigger="null">
+      <div class="logo">{{ collapsed ? 'HR' : 'HRSASS' }}</div>
+      <side-bar></side-bar>
+    </a-layout-sider>
+    <a-layout class="right-layout">
+      <a-layout-header> 
+        <nav-bar v-model:collapsed="collapsed"></nav-bar>
+      </a-layout-header>
+      <a-layout-content> 
+       <router-view></router-view>
+     </a-layout-content>
     </a-layout>
-  </template>
+  </a-layout>
+</template>
   
   <script setup>
   import { ref } from 'vue'
-  import sideBar from './compoments/side-bar.vue';
+  import SideBar from './compoments/side-bar.vue'
   import NavBar from './compoments/nav-bar.vue'
-  import Dashborard from '../dashborard/index.vue'
+  // import Dashborard from '../dashborard/index.vue'
   const collapsed = ref(false)
   
   </script>

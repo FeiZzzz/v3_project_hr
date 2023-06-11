@@ -5,8 +5,7 @@ export default {
   children: [
     {
       path: '', // 二级路由写个空 表示 它是默认的二级路由
-      name: 'setting',
-      component: () => import('../../views/setting/index.vue'),
+      component: () => import('@/views/setting/index.vue'),
       meta: {
         title: '公司设置',
         icon: 'SettingOutlined'
@@ -18,5 +17,3 @@ export default {
 }
 
 // 二级路由 path: '' /setting => layout-children
-
-

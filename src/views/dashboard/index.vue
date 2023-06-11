@@ -47,7 +47,6 @@
           <img src="https://vvbin.cn/next/assets/illustration.8e82152d.svg" alt="" />
         </a-card>
         <a-card title="部门分布" style="margin-top: 16px">
-          <!-- echarts容器  需要设置宽高-->
           <div id="radar" style="height: 340px"></div>
         </a-card>
       </a-col>
@@ -55,13 +54,11 @@
     <div class="work-dynamic"></div>
   </div>
 </template>
-<script setup name="Dashboard">
+<script setup>
 import { list as dynamicInfoItems } from './data'
 import * as echarts from 'echarts'
 import { onMounted } from 'vue'
 onMounted(() => {
-  //echarts配置
-  // 得到图表实例
   const radar = echarts.init(document.getElementById('radar'))
   const option = {
     tooltip: {
