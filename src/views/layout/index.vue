@@ -10,7 +10,7 @@
           <NavBar v-model:collapsed="collapsed"/>
         </a-layout-header>
         <a-layout-content>
-          中间内容
+          <Dashborard/>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -20,6 +20,7 @@
   import { ref } from 'vue'
   import sideBar from './compoments/side-bar.vue';
   import NavBar from './compoments/nav-bar.vue'
+  import Dashborard from '../dashborard/index.vue'
   const collapsed = ref(false)
   
   </script>
