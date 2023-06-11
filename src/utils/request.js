@@ -1,7 +1,7 @@
 import axios from "axios";
 import {message as Msg} from 'ant-design-vue'
 import useToken from '../stores/token'
-import router from '../router/index'
+import router from '@/router'
 // 使用axios 创建实例
 
 const serive = axios.create({
@@ -28,32 +28,29 @@ serive.interceptors.request.use(function (config) {
 // 添加响应拦截器
 // 响应拦截器- 数据获取到之后-  >then之前
 // 1. 成功  2. 失败
-axios.interceptors.response.use(function (response) {
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
-    const {success,message,data} = response.data
-    if(success){
+serive.interceptors.response.use(
+    (response) => {
+      const { success, message, data } = response.data // axios默认加了一层data
+      if (success) {
         // 表示执行成功
-        return data
-    }
-    // 提示消息 ---d到这里表示失败
-    
-    Msg.error(message)
-    // 报错消息
-    return Promise.reject(new Error(message));
-   
-   
-},(err)=>{
-    // 如果响应码状态为401表示token超时了 超时和没有token是一样的
-    if(err.response.status === 401){
-        const {removeToken} = useToken()
-        // 删除token
-        removeToken()
-        // 回到登陆页面
+        return data // 返回需要的业务数据
+      }
+      // 提示消息
+      Msg.error(message)
+      // 报错
+      return Promise.reject(new Error(message))
+    },
+    (error) => {
+      if (error.response.status === 401) {
+        // 此时说明token超时了- 超时和没有token是没有任何区别的
+        const { removeToken } = useToken()
+        removeToken() // 删除token
+        // 回到登录
         router.push('/login')
+      }
+      return Promise.reject(error)
     }
-  return  Promise.reject(err)
-});
+  )
 
 // 导出工具
 

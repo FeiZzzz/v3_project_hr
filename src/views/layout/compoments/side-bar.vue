@@ -1,20 +1,18 @@
 <template>
-    <a-menu class="side-bar" mode="inline" theme="dark">
-      <!-- 循环路由信息 生成左侧菜单项 -->
-      <template v-for="(item, index) in routes" :key="index">
-        <!-- 菜单项 -->
-        <a-menu-item>
-          <!-- 路由的链接 -->
-          <router-link class="link-name" :to="item.path">
-            <!-- Vue动态组件 component is(组件名称) -->
-            <component :is="getMeta(item).icon" />
-            <!-- Circle <Circle> <Round> -->
-            <span>{{ getMeta(item).title }}</span>
-          </router-link>
-        </a-menu-item>
-      </template>
-    </a-menu>
-  </template>
+  <a-menu class="side-bar" mode="inline" theme="dark">
+    <!-- 循环路由信息 生成左侧菜单项 -->
+    <!-- 菜单项 -->
+    <a-menu-item v-for="(item, index) in routes" :key="index">
+      <!-- 路由的链接 -->
+      <router-link class="link-name" :to="item.path">
+        <!-- Vue动态组件 component is(组件名称) -->
+        <component :is="getMeta(item).icon" />
+        <!-- Circle <Circle> <Round> -->
+        <span>{{ getMeta(item).title }}</span>
+      </router-link>
+    </a-menu-item>
+  </a-menu>
+</template>
   
   <script setup>
   import { computed } from 'vue'

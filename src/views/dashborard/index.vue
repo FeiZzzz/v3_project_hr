@@ -55,7 +55,7 @@
     <div class="work-dynamic"></div>
   </div>
 </template>
-<script setup>
+<script setup name="Dashboard">
 import { list as dynamicInfoItems } from './data'
 import * as echarts from 'echarts'
 import { onMounted } from 'vue'
